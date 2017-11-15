@@ -12,10 +12,10 @@ if(isset($_POST['submit'])){
     $bill = $_POST['bill'];
     $tip_percent = $_POST['tip'];
     $name = $_POST['name'];
-    $tipprcnt = $_POST['tipprcnt'];
-    $total = $_REQUEST['total'];
+    $tipprcnt = $_COOKIE['tipprcnt'];
+    $total = $_COOKIE['total'];
     $subject = "Your Electonric Receipt";
-    $message = "Here is a copy of your receipt " . "\n" . $_POST['bill'] . "\n" . $_REQUEST['tip'] . "\n" . $_POST['tipprcnt'] . "\n" . $_REQUEST['total'] . " from " . $_POST['name'];
+    $message = "Here is a copy of your receipt " . "\n" . $_POST['bill'] . "\n" . $_REQUEST['tip'] . "\n" . $_COOKIE['tipprcnt'] . "\n" . $_COOKIE['total'] . " from " . $_POST['name'];
 
     $headers = "From:" . $from;
     $headers2 = "From:" . $to;
@@ -39,7 +39,7 @@ if(isset($_POST['submit'])){
                 <br> Tip Percent: %<input id="tip" name="tip" type="text">
                 <br>
                 <input type="button" onclick="calc();" value="Calculate">
-                <br> Tip: <span id="tipprcnt" name="tipprcnt"></>
+                <br> Tip: <span id="tipprcnt" name="tipprcnt"></span>
                 <br> Total: <span id="total" name="total"></span>
                 <br>
                 Send an electronic receipt to your email! <input id="email" name="email" type="text" placeholder="Email Address">
@@ -58,7 +58,9 @@ if(isset($_POST['submit'])){
 
             document.getElementById("tipprcnt").innerHTML = "$" + (tipprcnt).toFixed(2);
             document.getElementById("total").innerHTML = "$" + (total).toFixed(2);
-           
+            document.cookie = "tipprcnt="+tipprcnt;
+            document.cookie = "total="+total;
+        
 
 
         }
