@@ -13,13 +13,13 @@ if(isset($_POST['submit'])){
     $tip_percent = $_POST['tip'];
     $name = $_POST['name'];
     $tipprcnt = $_POST['tipprcnt'];
-    $total = $_POST['total'];
+    $total = $_REQUEST['total'];
     $subject = "Your Electonric Receipt";
-    $message = "Here is a copy of your receipt " . "\n" . $_POST['bill'] . "\n" . $_POST['tip'] . "\n" . $_POST['tipprcnt'] . "\n" . $_POST['total'] . " from " . $_POST['name'];
+    $message = "Here is a copy of your receipt " . "\n" . $_POST['bill'] . "\n" . $_REQUEST['tip'] . "\n" . $_POST['tipprcnt'] . "\n" . $_REQUEST['total'] . " from " . $_POST['name'];
 
     $headers = "From:" . $from;
     $headers2 = "From:" . $to;
-    mail($from,$subject,$message,$headers); 
+    mail($from,$subject,$message,$headers) or die ("Mail could not be sent."); 
     echo "Mail Sent. Thank you";
     
     }
@@ -34,19 +34,19 @@ if(isset($_POST['submit'])){
         </head>
 
         <body>
-            <form onsubmit="return false">
+            <form method="post">    
                 Amount: $<input id="bill" name="bill" type="text">
                 <br> Tip Percent: %<input id="tip" name="tip" type="text">
                 <br>
-                <button onclick="calc();" value="Calculate">Calculate</button>
-                <br> Tip: <span id="tipprcnt" name="tipprcnt"></span>
+                <input type="button" onclick="calc();" value="Calculate">
+                <br> Tip: <span id="tipprcnt" name="tipprcnt"></>
                 <br> Total: <span id="total" name="total"></span>
-            </form>
-            <form method="post">
+                <br>
                 Send an electronic receipt to your email! <input id="email" name="email" type="text" placeholder="Email Address">
                 <br> Resturaunt name: <input id="name" type="text" name="name" placeholder="Resturaunt Name">
                 <br>
                 <input type="submit" name="submit" value="Send your e-Receipt!">
+
             </form>
     </div>
     <script>
@@ -58,6 +58,8 @@ if(isset($_POST['submit'])){
 
             document.getElementById("tipprcnt").innerHTML = "$" + (tipprcnt).toFixed(2);
             document.getElementById("total").innerHTML = "$" + (total).toFixed(2);
+           
+
 
         }
 
