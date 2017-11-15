@@ -5,7 +5,7 @@ if($_POST["email"]):
 mail($_POST["email"],"Your Tip Calculation',Bill: ".$_POST["bill"]."\nTip: ".$_POST["tip"]."\nTotal:".$_POST["total"]);
 endif; */
 
-?> 
+?>
     <html>
 
     <div id="wrapper">
@@ -14,6 +14,7 @@ endif; */
             <meta charset=utf-8 />
             <title>Tip Calculator</title>
             <h1>Tip Calculator</h1>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         </head>
 
         <body>
@@ -28,8 +29,8 @@ endif; */
             <form onsubmit="">
                 Send an electronic receipt to your email! <input id="email" type="text" placeholder="Email Address">
                 <br>
-                <button onclick"" value="submit">Send e-Receipt!</button>
-            </form>    
+                <button onclick "" value="submit">Send e-Receipt!</button>
+            </form>
     </div>
     <script>
         function calc() {
@@ -41,6 +42,30 @@ endif; */
             document.getElementById("tipprcnt").innerHTML = "$" + (tipprcnt).toFixed(2);
             document.getElementById("total").innerHTML = "$" + (total).toFixed(2);
 
+        }
+
+    </script>
+    <script>
+        function myFunction() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            // Returns successful data submission message when the entered information is stored in database.
+            var dataString = 'name1=' + name + '&email1=' + email ;
+            if (name == '' || email == '') {
+                alert("Please Fill All Fields");
+            } else {
+                // AJAX code to submit form.
+                $.ajax({
+                    type: "POST",
+                    url: "ajaxjs.php",
+                    data: dataString,
+                    cache: false,
+                    success: function(html) {
+                        alert(html);
+                    }
+                });
+            }
+            return false;
         }
 
     </script>
