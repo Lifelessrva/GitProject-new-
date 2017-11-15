@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <?php
-/*
-if($_POST["email"]):
-mail($_POST["email"],"Your Tip Calculation',Bill: ".$_POST["bill"]."\nTip: ".$_POST["tip"]."\nTotal:".$_POST["total"]);
-endif; 
-} */
+
 
 if(isset($_POST['submit'])){
     $to = "bob@sideviewrva.com";
@@ -34,15 +30,14 @@ if(isset($_POST['submit'])){
         </head>
 
         <body>
-            <form method="post">    
+            <form method="post">
                 Amount: $<input id="bill" name="bill" type="text">
                 <br> Tip Percent: %<input id="tip" name="tip" type="text">
                 <br>
                 <input type="button" onclick="calc();" value="Calculate">
                 <br> Tip: <span id="tipprcnt" name="tipprcnt"></span>
                 <br> Total: <span id="total" name="total"></span>
-                <br>
-                Send an electronic receipt to your email! <input id="email" name="email" type="text" placeholder="Email Address">
+                <br> Send an electronic receipt to your email! <input id="email" name="email" type="text" placeholder="Email Address">
                 <br> Resturaunt name: <input id="name" type="text" name="name" placeholder="Resturaunt Name">
                 <br>
                 <input type="submit" name="submit" value="Send your e-Receipt!">
@@ -58,9 +53,9 @@ if(isset($_POST['submit'])){
 
             document.getElementById("tipprcnt").innerHTML = "$" + (tipprcnt).toFixed(2);
             document.getElementById("total").innerHTML = "$" + (total).toFixed(2);
-            document.cookie = "tipprcnt="+tipprcnt;
-            document.cookie = "total="+total;
-        
+            document.cookie = "tipprcnt=" + tipprcnt;
+            document.cookie = "total=" + total;
+
 
 
         }
