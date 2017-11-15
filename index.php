@@ -3,11 +3,28 @@
 /*
 if($_POST["email"]):
 mail($_POST["email"],"Your Tip Calculation',Bill: ".$_POST["bill"]."\nTip: ".$_POST["tip"]."\nTotal:".$_POST["total"]);
-endif; */
+endif; 
+} */
+
+if(isset($_POST['submit'])){
+    $from = $_POST['email'];
+    $bill = $_POST['bill'];
+    $tip_percent = $_POST['tip'];
+    $name = $_POST['name'];
+    $tipprcnt = $_POST['tipprcnt'];
+    $total = $_POST['total'];
+    $subject = "Your Electonric Receipt";
+    $message = "Here is a copy of your receipt " . $first_name . "\n\n" . $_POST['bill'] . "\n\n" . $_POST['tip'] . "\n\n" . $_POST['tipprcnt'] . "\n\n" . $_POST['total'] . " from" $_POST['name'];
+
+    $headers = "From:" . $from;
+    $headers2 = "From:" . $to;
+    mail($from,$subject,$message,$header); 
+    echo "Mail Sent. Thank you";
+    
+    }
 
 ?>
     <html>
-
     <div id="wrapper">
 
         <head>
@@ -26,8 +43,10 @@ endif; */
                 <br> Tip: <span id="tipprcnt"></span>
                 <br> Total: <span id="total"></span>
             </form>
-            <form onsubmit="">
+            <form method="post">
                 Send an electronic receipt to your email! <input id="email" type="text" placeholder="Email Address">
+                <br>
+                Resturaunt name: <input id="name" type="text" placeholder="Resturaunt Name">
                 <br>
                 <button onclick "" value="submit">Send e-Receipt!</button>
             </form>
@@ -42,30 +61,6 @@ endif; */
             document.getElementById("tipprcnt").innerHTML = "$" + (tipprcnt).toFixed(2);
             document.getElementById("total").innerHTML = "$" + (total).toFixed(2);
 
-        }
-
-    </script>
-    <script>
-        function myFunction() {
-            var name = document.getElementById("name").value;
-            var email = document.getElementById("email").value;
-            // Returns successful data submission message when the entered information is stored in database.
-            var dataString = 'name1=' + name + '&email1=' + email ;
-            if (name == '' || email == '') {
-                alert("Please Fill All Fields");
-            } else {
-                // AJAX code to submit form.
-                $.ajax({
-                    type: "POST",
-                    url: "ajaxjs.php",
-                    data: dataString,
-                    cache: false,
-                    success: function(html) {
-                        alert(html);
-                    }
-                });
-            }
-            return false;
         }
 
     </script>
